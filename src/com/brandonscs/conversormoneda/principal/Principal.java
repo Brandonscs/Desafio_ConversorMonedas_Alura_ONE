@@ -1,7 +1,9 @@
 package com.brandonscs.conversormoneda.principal;
 
 import com.brandonscs.conversormoneda.procesos.CambiarPuntos;
+import com.brandonscs.conversormoneda.procesos.Conversion;
 import com.brandonscs.conversormoneda.procesos.ConvertirMoneda;
+import com.brandonscs.conversormoneda.procesos.HistorialConversiones;
 
 import java.util.Scanner;
 
@@ -10,6 +12,7 @@ public class Principal {
         Scanner leer = new Scanner(System.in);
         ConvertirMoneda convertirMoneda = new ConvertirMoneda();
         CambiarPuntos cambiarPuntos = new CambiarPuntos();
+        HistorialConversiones historial = new HistorialConversiones();
         int opcion;
         boolean validacion;
         boolean bucleActivo = true;
@@ -31,7 +34,8 @@ public class Principal {
                 4) Real Brasileño =>> Dolar
                 5) Dolar =>> Peso colombiano
                 6) Peso colombiano =>> Dolar
-                7) Salir
+                7) Mostrar historial de conversion
+                8) Salir
                 
                 *******************************************
                 """;
@@ -72,6 +76,10 @@ public class Principal {
                     cambioMoneda = "USD";
                     break;
                 case 7:
+                    historial.mostrarHistorial();
+                    validacion = false;
+                    break;
+                case 8:
                     System.out.println("Cerrando programa...");
                     bucleActivo = false;
                     validacion = false;
@@ -87,6 +95,8 @@ public class Principal {
                 valorMoneda = cambiarPuntos.cambiarPuntos(textoValor);
                 nuevoValor = convertirMoneda.cambiarMoneda(monedaBase, cambioMoneda, valorMoneda);
                 System.out.printf("El valor de %.2f [%s] corresponde a %.2f [%s]%n", valorMoneda, monedaBase, nuevoValor, cambioMoneda);
+                Conversion conversion = new Conversion(monedaBase, cambioMoneda, valorMoneda, nuevoValor);
+                historial.agregarConversion(conversion);
             }
         }
     }

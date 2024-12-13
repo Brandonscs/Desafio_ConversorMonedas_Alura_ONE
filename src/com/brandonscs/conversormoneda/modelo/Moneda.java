@@ -1,4 +1,6 @@
 package com.brandonscs.conversormoneda.modelo;
 
-public record Moneda() {
+import java.util.Map;
+
+public record Moneda(Map<String, Double> conversion_rates) {
 }

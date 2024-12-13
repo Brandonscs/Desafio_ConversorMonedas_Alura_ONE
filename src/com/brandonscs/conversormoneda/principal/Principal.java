@@ -38,7 +38,12 @@ public class Principal {
 
         while (bucleActivo) {
             System.out.println(menu);
-            opcion = leer.nextInt();
+            try {
+                opcion = Integer.parseInt(leer.next());
+            } catch (NumberFormatException e) {
+                System.out.println("Por favor, ingrese un número válido.");
+                continue;
+            }
             validacion = true;
 
             switch (opcion) {
@@ -81,7 +86,6 @@ public class Principal {
                 textoValor = leer.next();
                 valorMoneda = cambiarPuntos.cambiarPuntos(textoValor);
                 nuevoValor = convertirMoneda.cambiarMoneda(monedaBase, cambioMoneda, valorMoneda);
-
                 System.out.printf("El valor de %.2f [%s] corresponde a %.2f [%s]%n", valorMoneda, monedaBase, nuevoValor, cambioMoneda);
             }
         }

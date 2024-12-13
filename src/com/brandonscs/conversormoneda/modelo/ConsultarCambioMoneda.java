@@ -21,7 +21,7 @@ public class ConsultarCambioMoneda {
                     .send(request, HttpResponse.BodyHandlers.ofString());
             return new Gson().fromJson(response.body(), Moneda.class);
         } catch (Exception e) {
-            throw new RuntimeException("No se encontrdo cambio de moneda: " + e);
+            throw new RuntimeException("No se encontrdo cambio de moneda: " + e.getMessage());
         }
     }
 }
